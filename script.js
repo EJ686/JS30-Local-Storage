@@ -1,6 +1,6 @@
 const addItems = document.querySelector('.add-items');
 const itemsList = document.querySelector('.plates');
-const items = [];
+const items = JSON.parse(localStorage.getItem('items')) || [];
 
 function addItem (e) {
     e.preventDefault(); // Prevents the form from submitting and refreshing page
@@ -11,6 +11,7 @@ function addItem (e) {
     }
     items.push(item);
     populateList(items, itemsList);
+    localStorage.setItem('items', JSON.stringify(items));
     this.reset(); // 'This' is the form element and it clears the form field
 };
 
@@ -18,10 +19,13 @@ function populateList (plates = [], platesList) {
     platesList.innerHTML = plates.map((plate, i) => {
         return `
         <li>
-            <label for="">${plate.text}</label>
+            <input type="checkbox" data-index=${i} id="item${i}" ${plate.done ? 'checked' : ''} />
+            <label for="item${i}">${plate.text}</label>
         </li>
         `;
     }).join('');
 };
 
 addItems.addEventListener('submit', addItem);
+
+populateList(items, itemsList);
