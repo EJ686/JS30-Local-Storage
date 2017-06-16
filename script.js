@@ -26,6 +26,16 @@ function populateList (plates = [], platesList) {
     }).join('');
 };
 
+function toggleDone (e) {
+    if (!e.target.matches('input')) return; // skip this unless its an input
+    console.log(e.target);
+}
+
 addItems.addEventListener('submit', addItem);
+itemsList.addEventListener('click', toggleDone);
+
+
+// const checkBoxes = document.querySelectorAll('input');
+// checkBoxes.forEach(input => input.addEventListener('click', () => alert ('hi')));
 
 populateList(items, itemsList);
