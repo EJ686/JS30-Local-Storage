@@ -28,7 +28,11 @@ function populateList (plates = [], platesList) {
 
 function toggleDone (e) {
     if (!e.target.matches('input')) return; // skip this unless its an input
-    console.log(e.target);
+    const el = e.target;
+    const index = el.dataset.index;
+    items[index].done = !items[index].done; // If this is true make it false. flip flopping the value
+    localStorage.setItem('items', JSON.stringify(items)); // store in local storage
+    populateList(items, itemsList); // updates the list
 }
 
 addItems.addEventListener('submit', addItem);
