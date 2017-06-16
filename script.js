@@ -9,6 +9,7 @@ function addItem (e) {
         text: text,
         done: false
     }
+    items.push(item);
     this.reset(); // 'This' is the form element and it clears the form field
 }
 
